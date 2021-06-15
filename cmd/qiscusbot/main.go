@@ -10,21 +10,21 @@ import (
 
 type Env struct {
     Router *mux.Router
-    Port string
+    Port   string
 }
 
-func main()  {
+func main() {
     env := Setup()
     log.Println("Listening on ", env.Port)
-
+    env.Run(":" + env.Port)
 }
 
 func Setup() Env {
-     port := "80" // default port
+    port := "80" // default port
 
-     // needed in heroku environment
-     if os.Getenv("PORT") != "" {
-       port = os.Getenv("PORT")
+    // needed in heroku environment
+    if os.Getenv("PORT") != "" {
+        port = os.Getenv("PORT")
     }
 
     env := Env{
