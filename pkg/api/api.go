@@ -6,6 +6,7 @@ import (
 )
 
 func Reply(w http.ResponseWriter, r *http.Request) {
+    log.SetFlags(log.LstdFlags | log.Lshortfile)
     log.Println(r.Header)
     getBody, err := r.GetBody()
     if err != nil {
