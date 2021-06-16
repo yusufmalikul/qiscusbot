@@ -20,7 +20,7 @@ func main() {
 }
 
 func Setup() Env {
-    port := "80" // default port
+    port := "8080" // default port
 
     // needed in heroku environment
     if os.Getenv("PORT") != "" {
