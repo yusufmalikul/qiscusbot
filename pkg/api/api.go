@@ -64,7 +64,7 @@ func postComment(roomId int) {
     payload := strings.NewReader(fmt.Sprintf(`{
       "user_id": "bot",
       "room_id": "%v",
-      "message": "apa artinya? %s"
+      "message": "%s"
     }`, roomId, comment[rand.Intn(len(comment))]))
 
     client := &http.Client{
