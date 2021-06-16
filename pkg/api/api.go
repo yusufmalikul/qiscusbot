@@ -5,6 +5,7 @@ import (
     "fmt"
     "io/ioutil"
     "log"
+    "math/rand"
     "net/http"
     "os"
     "strings"
@@ -44,23 +45,27 @@ func Reply(w http.ResponseWriter, r *http.Request) {
         return
     }
 
-    log.Println(payloadData.Payload.From.Id)
-    log.Println(payloadData.Payload.From.Name)
-    log.Println(payloadData.Payload.Room.Id)
-
-    postComment(payloadData.Payload.From.Id, payloadData.Payload.Room.Id, payloadData.Payload.Message.Text)
+    postComment(payloadData.Payload.Room.Id)
 
 }
 
-func postComment(userId int, roomId int, message string) {
+func postComment(roomId int) {
     url := "https://api.qiscus.com/api/v2.1/rest/post_comment"
     method := "POST"
+
+    comment := []string{
+        "senang bertemu denganmu!",
+        "saya sering lupa.",
+        "bagaimana kabarmu?",
+        "waktunya istirahat",
+        "namaku qiscusbot :)",
+    }
 
     payload := strings.NewReader(fmt.Sprintf(`{
       "user_id": "bot",
       "room_id": "%v",
       "message": "apa artinya? %s"
-    }`, roomId, message))
+    }`, roomId, comment[rand.Intn(len(comment))]))
 
     client := &http.Client{
     }
