@@ -7,5 +7,5 @@ import (
 
 func InitRoutes(router *mux.Router) {
     router.HandleFunc("/", api.Home).Methods("GET")
-    router.HandleFunc("/webhook", api.Reply)
+    router.HandleFunc("/webhook", api.Reply).Methods("POST")
 }
